@@ -1,7 +1,5 @@
 # The MIT License
 #
-#  Copyright (c) 2015, CloudBees, Inc.
-#
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
 #  in the Software without restriction, including without limitation the rights
@@ -23,12 +21,12 @@
 FROM cupenya/docker-jenkins-slave-ivy2-cache
 MAINTAINER Elmar Weber <elmar(.)weber(@)cupenya(.)com>
 
-#setup mongo
+# setup mongo
 USER root
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
-  echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list && \
-  apt-get update && apt-get install -y --allow-unauthenticated mongodb-org=3.4.7 mongodb-org-server=3.4.7 mongodb-org-shell=3.4.7 mongodb-org-mongos=3.4.7 mongodb-org-tools=3.4.7
 
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv BC711F9BA15703C6
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+RUN apt-get update && apt-get install -y mongodb-org=3.4.7 mongodb-org-server=3.4.7 mongodb-org-shell=3.4.7 mongodb-org-mongos=3.4.7 mongodb-org-tools=3.4.7
 RUN mkdir -p /data/db
 
 COPY supervisord-mongod.conf /etc/supervisor/conf.d/mongod.conf
